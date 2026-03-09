@@ -1,0 +1,29 @@
+name: Package WordPress Plugin
+
+on:
+  push:
+    tags:
+      - '*'  # Triggers on all tag pushes (e.g. v1.0.0)
+
+jobs:
+  build-and-release:
+    name: Zip and upload theme
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Prepare clean zip folder
+        run: |
+          mkdir cdmn-school-handbook
+          shopt -s extglob
+          cp -r !(cdmn-school-handbook|.git|.github) cdmn-school-handbook/
+          zip -r cdmn-school-handbook.zip cdmn-school-handbook
+
+      - name: Create Release and Upload Asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: cdmn-school-handbook.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

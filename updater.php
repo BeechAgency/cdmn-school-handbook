@@ -36,24 +36,34 @@ class BEECH_Updater {
     }
 
     private function get_repository_info() {
-        if ( is_null( $this->github_response ) ) { // Do we have a response?
-        $args = array();
-            $request_uri = sprintf( 'https://api.github.com/repos/%s/%s/releases', $this->username, $this->repository ); // Build URI
-            
-        $args = array();
+        // Caches the response once fetched so we don't hit GitHub every time.
+        if ( is_null( $this->github_response ) ) {
+            $request_uri = sprintf( 'https://api.github.com/repos/%s/%s/releases', $this->username, $this->repository );
 
-            if( $this->authorize_token ) { // Is there an access token?
-                $args['headers']['Authorization'] = "token {$this->authorize_token}"; // Set the headers
+            $args = [];
+            if ( $this->authorize_token ) { // Add auth header if available.
+                $args['headers']['Authorization'] = "token {$this->authorize_token}";
             }
 
-            $response = json_decode( wp_remote_retrieve_body( wp_remote_get( $request_uri, $args ) ), true ); // Get JSON and parse it
-
-            if( is_array( $response ) ) { // If it is an array
-                $response = current( $response ); // Get the first item
+            $remote = wp_remote_get( $request_uri, $args );
+            if ( is_wp_error( $remote ) ) {
+                // store empty array so we don't keep retrying on failure
+                $this->github_response = [];
+                return $this->github_response;
             }
 
-            $this->github_response = $response; // Set it to our property
+            $body = wp_remote_retrieve_body( $remote );
+            $response = json_decode( $body, true );
+
+            if ( is_array( $response ) && ! empty( $response ) ) {
+                $response = current( $response );
+            }
+
+            // Ensure we always have an array to avoid warnings downstream.
+            $this->github_response = is_array( $response ) ? $response : [];
         }
+
+        return $this->github_response;
     }
 
     public function initialize() {
@@ -77,15 +87,24 @@ class BEECH_Updater {
             if( $checked = $transient->checked ) { // Did Wordpress check for updates?
                 $this->get_repository_info(); // Get the repo info
 
-                $out_of_date = version_compare( $this->github_response['tag_name'], $checked[ $this->basename ], 'gt' ); // Check if we're out of date
+                $info = $this->github_response ?: $this->get_repository_info();
 
-                if( $out_of_date ) {
+                if ( empty( $info ) || ! isset( $info['tag_name'] ) ) {
+                    // no valid release data available so bail out quietly
+                    return $transient;
+                }
 
-                    $new_files = $this->github_response['zipball_url']; // Get the ZIP
+                $current_version = isset( $checked[ $this->basename ] ) ? $checked[ $this->basename ] : '';
+                $out_of_date = $current_version && version_compare( $info['tag_name'], $current_version, 'gt' );
 
-                    // If there are theme assets attached, use those instead!
-                    if( isset($git_response->assets) && is_countable($git_response->assets) && count($git_response->assets) > 0 ) {
-                        $new_files = $git_response->assets[0]->browser_download_url;
+                if ( $out_of_date ) {
+
+                    $new_files = $info['zipball_url'];
+
+                    // If there are release assets attached, use those instead.
+                    if ( isset( $info['assets'] ) && is_countable( $info['assets'] ) && count( $info['assets'] ) > 0 ) {
+                        // assets are decoded as arrays
+                        $new_files = $info['assets'][0]['browser_download_url'];
                     }
 
                     $slug = current( explode('/', $this->basename ) ); // Create valid slug
