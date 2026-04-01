@@ -1,5 +1,8 @@
 :root {
-	--fs-body-large : 1.5rem
+	--fs-body-large : 1.5rem;
+}
+.handbook h6 {
+	margin-bottom: 0.5rem;
 }
 .handbook .hamburger{display:none}
 .handbook #page  > header{display:none}
@@ -38,6 +41,8 @@
 .handbook .slick-dots li button{margin:0;padding:0;border:none;cursor:pointer;text-indent:-9999px;overflow:hidden;width:8px;height:8px;border-radius:50%;background:#BABABA;}
 .handbook .slick-dots li.slick-active button{border-radius:24px;width:28px;background-color:var(--primary-dark,#000)}
 .handbook .slick-dots li button:hover{background-color:var(--primary-dark,#000)}
+
+.handbook .nav-weight-light ul li { font-weight: 300; }
 
 /*Image block*/
 .handbook .images-block{padding-top:0px;position:relative;padding-bottom:0px}
@@ -93,7 +98,7 @@
 .handbook .bell .heading-list .row table{width: auto;flex:1;}
 .handbook .text-block ol{counter-reset:item;list-style:none;overflow:hidden;padding:0;}
 .handbook .text-block ol li{min-height:78px;padding:0 0 0 10%;position:relative;vertical-align:top;border-top:1px solid #C5C5C5;padding:1rem 0 1rem 16%;padding-right: 19%;}
-.handbook .text-block ol li:before {position:absolute;top:8px;left:0;font-family: var(--ff-serif, Arial, sans-serif);font-size:var(--fs-h4,1.5rem);font-size:48px;	content:counters(item, ".") ". ";	counter-increment:item;}
+.handbook .text-block ol li:before {position:absolute;top:8px;left:0;font-family: var(--ff-serif, Arial, sans-serif);font-size:var(--fs-h3, 1.5rem);	content:counters(item, ".") ". ";	counter-increment:item;}
 .handbook .text-block .h{padding-top:32px;display:flex;justify-content:space-between;}
 .handbook .text-block .h .col{width:48%}
 .handbook .text-block .h.three-col .col{width:31%}

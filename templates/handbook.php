@@ -12,9 +12,24 @@ $site_sub_title = get_field('site_sub_title');
 $site_desc      = get_field('site_description');
 $logo           = get_field('logo');
 $sidebar_text   = get_field('sidebar_text');
+
+$handbook_style = get_field('handbook_style') ?: [];
+
+$heading_color = $handbook_style['heading_color'] ?? '';
+$subheading_color    = $handbook_style['subheading_color'] ?? '';
+$navigation_weight = $handbook_style['navigation_font_weight'] ?? '';
+
+
+if( $heading_color && $heading_color !== 'default') {
+	echo '<style>.handbook-content h2 { color: var(--' . esc_attr($heading_color) . '); }</style>';
+}
+if( $subheading_color  && $subheading_color !== 'default') {
+	echo '<style>.handbook-content p.sub-title { color: var(--' . esc_attr($subheading_color) . '); }</style>';
+}
+
 ?>
 
-<div class="handbook-wrapper" >
+<div class="handbook-wrapper nav-weight-<?php echo esc_attr($navigation_weight); ?>">
 	<!-- Sidebar -->
 	<aside class="handbook-sidebar">
 		<div class="top">
@@ -63,7 +78,7 @@ $sidebar_text   = get_field('sidebar_text');
 						?>
 						<div class="text-block">
 							<?php if($sub_title): ?>
-								<p><?php echo esc_html($sub_title); ?></p>
+								<p class="sub-title"><?php echo esc_html($sub_title); ?></p>
 							<?php endif; ?>
 							<?php if($main_title): ?>
 								<h2><?php echo esc_html($main_title); ?></h2>
@@ -128,13 +143,13 @@ $sidebar_text   = get_field('sidebar_text');
 						?>
 						<div class="image-text <?php echo esc_attr($image_position);?> <?php if($type) echo esc_attr($type);?>" >
 							<?php if($type !== 'inline'):?>
-								<p><?php echo esc_html($sub_title); ?></p>
+								<p class="sub-title"><?php echo esc_html($sub_title); ?></p>
 								<h2><?php echo esc_html($main_title); ?></h2>
 							<?php endif;?>
 							<div class="h">
 								<div class="text">
 									<?php if($type === 'inline'):?>
-										<p><?php echo esc_html($sub_title); ?></p>
+										<p class="sub-title"><?php echo esc_html($sub_title); ?></p>
 										<h2><?php echo esc_html($main_title); ?></h2>
 									<?php endif;?>
 									<div class="wysiwyg"><?php echo $text_area; ?></div>
@@ -188,7 +203,7 @@ $sidebar_text   = get_field('sidebar_text');
 						$main_title = get_sub_field('main_title');
 						?>
 						<div class="team-member">
-							<p><?php echo esc_html($sub_title); ?></p>
+							<p class="sub-title"><?php echo esc_html($sub_title); ?></p>
 							<h2><?php echo esc_html($main_title); ?></h2>
 							<?php if( have_rows('team_section') ): ?>
 								<?php while( have_rows('team_section') ): the_row(); ?>
@@ -240,7 +255,7 @@ $sidebar_text   = get_field('sidebar_text');
 						$description = get_sub_field('description');
 						?>
 						<?php if($sub_title): ?>
-							<p><?php echo esc_html($sub_title); ?></p>
+							<p class="sub-title"><?php echo esc_html($sub_title); ?></p>
 						<?php endif; ?>
 						<?php if($main_title): ?>
 							<h2><?php echo esc_html($main_title); ?></h2>

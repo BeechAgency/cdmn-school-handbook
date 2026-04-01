@@ -2,7 +2,7 @@
 /**
  * Plugin Name: CDMN School Handbook
  * Description: Enables Student & Staff Handbook functionality for Schools using the Catholic Diocese of Maitland-Newcastle template.
- * Version: 1.0
+ * Version: 1.2
  * Author: Beech Agency
  * Author URI: https://beech.agency
  */
