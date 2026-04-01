@@ -235,7 +235,7 @@ function school_handbook_admin_assets($hook_suffix) {
             'school-handbook-admin',
             plugin_dir_url(__FILE__) . 'assets/css/admin-handbook.css',
             [],
-            '1.0'
+            '1.2'
         );
     }
 }
