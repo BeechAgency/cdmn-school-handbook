@@ -27,14 +27,14 @@ function school_handbook_enqueue_assets() {
 			'school-handbook',
 			plugin_dir_url(__FILE__) . 'assets/css/handbook.css',
 			[],
-			'2.0'
+			'2.3'
 		);
 
 		wp_enqueue_script(
 			'school-handbook',
 			plugin_dir_url(__FILE__) . 'assets/js/handbook.js',
 			['jquery'],
-			'2.0',
+			'2.3',
 			true
 		);
 

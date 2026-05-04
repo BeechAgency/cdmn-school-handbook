@@ -867,7 +867,8 @@
                             "choices": {
                                 "21": "2\/1",
                                 "content": "Content width",
-                                "slider": "Image slider"
+                                "slider": "Image slider",
+                                "vimeo": "Vimeo video"
                             },
                             "default_value": "",
                             "return_format": "value",
@@ -889,6 +890,11 @@
                                         "field": "field_6986ef87d23f4",
                                         "operator": "!=",
                                         "value": "slider"
+                                    },
+                                    {
+                                        "field": "field_6986ef87d23f4",
+                                        "operator": "!=",
+                                        "value": "vimeo"
                                     }
                                 ]
                             ],
@@ -946,6 +952,35 @@
                             "mime_types": "",
                             "insert": "append",
                             "preview_size": "medium"
+                        },
+                        {
+                            "key": "field_6986ef87d2401",
+                            "label": "Vimeo URL",
+                            "name": "vimeo_url",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Paste the full Vimeo video URL, e.g. https:\/\/vimeo.com\/123456789",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_6986ef87d23f4",
+                                        "operator": "==",
+                                        "value": "vimeo"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "https:\/\/vimeo.com\/123456789",
+                            "prepend": "",
+                            "append": ""
                         }
                     ],
                     "min": "",
@@ -1599,5 +1634,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1775020021
+    "modified": 1777852800
 }

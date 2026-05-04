@@ -190,6 +190,16 @@ if( $subheading_color  && $subheading_color !== 'default') {
 									<?php endforeach; ?>
 								</div>
 							<?php endif; ?>
+						<?php elseif($type === 'vimeo'):?>
+							<?php
+							$vimeo_url = get_sub_field('vimeo_url');
+							if( $vimeo_url && preg_match('/(?:vimeo\.com\/(?:video\/)?)(\d+)/', $vimeo_url, $matches) ):
+								$vimeo_id = $matches[1];
+							?>
+								<div class="vimeo-embed">
+									<iframe src="https://player.vimeo.com/video/<?php echo esc_attr($vimeo_id); ?>" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+								</div>
+							<?php endif; ?>
 						<?php else:?>
 								<?php
 								$img_id = get_sub_field('image');
