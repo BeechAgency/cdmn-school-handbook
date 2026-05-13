@@ -80,9 +80,17 @@ jQuery(function ($) {
 		}
 	});
 });
-jQuery(document).on('click', '.handbook-sidebar .top li a', function(e) {
+jQuery(document).on('click', '.handbook-sidebar .top li > a', function(e) {
+    var $a = jQuery(this);
+    var $li = $a.parent();
+    var isSubItem = $li.parent().hasClass('sub-nav');
+
+    if (!isSubItem && $li.hasClass('has-subnav')) {
+        $li.toggleClass('open');
+    }
+
     if (jQuery(window).width() < 768) {
-        var target = jQuery(this).attr('href');
+        var target = $a.attr('href');
         if (target && target.startsWith('#')) {
             e.preventDefault();
             var $target = jQuery(target);
@@ -90,12 +98,12 @@ jQuery(document).on('click', '.handbook-sidebar .top li a', function(e) {
                 jQuery('html, body').animate({
                     scrollTop: $target.offset().top
                 }, 600);
-
             }
         }
-        jQuery('.hamburger').toggleClass('active');
-        jQuery('.handbook-sidebar').toggleClass('active');
-        jQuery('body').toggleClass('openmenu');
+        if (isSubItem || !$li.hasClass('has-subnav')) {
+            jQuery('.hamburger').toggleClass('active');
+            jQuery('.handbook-sidebar').toggleClass('active');
+            jQuery('body').toggleClass('openmenu');
+        }
     }
-
 });

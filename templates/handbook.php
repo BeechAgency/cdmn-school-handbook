@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Template Name: Handbook
  */
@@ -36,14 +36,47 @@ if( $subheading_color  && $subheading_color !== 'default') {
 			<?php if($site_title) echo '<h4>' . esc_html($site_title) . '</h4>';?>
 			<h5>Navigation</h5>
 			<ul>
-				<?php if( have_rows('handbook_content') ): $counter = 0; ?>
-					<?php while( have_rows('handbook_content') ): the_row(); $counter++; ?>
-						<?php $main_title = get_sub_field('main_title'); ?>
-						<?php if($main_title): ?>
-							<li><a href="#block-<?php echo $counter; ?>"><?php echo esc_html($main_title); ?></a></li>
-						<?php endif; ?>
-					<?php endwhile; ?>
-				<?php endif; ?>
+				<?php
+				$nav_items = [];
+				if( have_rows('handbook_content') ):
+					$c = 0;
+					while( have_rows('handbook_content') ): the_row(); $c++;
+						$title = get_sub_field('main_title');
+						if( $title ):
+							$nav_items[] = [
+								'title' => $title,
+								'block' => $c,
+								'sub'   => (bool) get_sub_field('nav_sub_item'),
+							];
+						endif;
+					endwhile;
+				endif;
+				$i = 0; $total = count($nav_items);
+				while( $i < $total ):
+					$item = $nav_items[$i];
+					if( ! $item['sub'] ):
+						$j = $i + 1;
+						$has_sub = ( $j < $total && $nav_items[$j]['sub'] );
+						echo '<li' . ( $has_sub ? ' class="has-subnav"' : '' ) . '>';
+						echo '<a href="#block-' . $item['block'] . '">' . esc_html($item['title']) . '</a>';
+						if( $has_sub ):
+							echo '<ul class="sub-nav">';
+							while( $j < $total && $nav_items[$j]['sub'] ):
+								echo '<li><a href="#block-' . $nav_items[$j]['block'] . '">' . esc_html($nav_items[$j]['title']) . '</a></li>';
+								$j++;
+							endwhile;
+							echo '</ul>';
+							$i = $j;
+						else:
+							$i++;
+						endif;
+						echo '</li>';
+					else:
+						echo '<li><a href="#block-' . $item['block'] . '">' . esc_html($item['title']) . '</a></li>';
+						$i++;
+					endif;
+				endwhile;
+				?>
 			</ul>
 		</div>
 		<?php if($sidebar_text) echo '<div class="info">' . $sidebar_text . '</div>';?>

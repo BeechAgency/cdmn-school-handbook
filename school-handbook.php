@@ -27,7 +27,7 @@ function school_handbook_enqueue_assets() {
 			'school-handbook',
 			plugin_dir_url(__FILE__) . 'assets/css/handbook.css',
 			[],
-			'2.3'
+			'2.5'
 		);
 
 		wp_enqueue_script(

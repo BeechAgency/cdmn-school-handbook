@@ -259,6 +259,26 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_6823e480a0001",
+                            "label": "Show as sub item in navigation",
+                            "name": "nav_sub_item",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": 0,
+                            "message": "",
+                            "ui": 1,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
                             "key": "field_6986ed2170ac6",
                             "label": "Type",
                             "name": "type",
@@ -652,6 +672,26 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_6823e480a0002",
+                            "label": "Show as sub item in navigation",
+                            "name": "nav_sub_item",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": 0,
+                            "message": "",
+                            "ui": 1,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
                             "key": "field_6986ee66caba1",
                             "label": "Type",
                             "name": "type",
@@ -851,6 +891,26 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_6823e480a0003",
+                            "label": "Show as sub item in navigation",
+                            "name": "nav_sub_item",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": 0,
+                            "message": "",
+                            "ui": 1,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
                             "key": "field_6986ef87d23f4",
                             "label": "Type",
                             "name": "type",
@@ -1000,6 +1060,26 @@
                     "label": "Team member",
                     "display": "block",
                     "sub_fields": [
+                        {
+                            "key": "field_6823e480a0004",
+                            "label": "Show as sub item in navigation",
+                            "name": "nav_sub_item",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": 0,
+                            "message": "",
+                            "ui": 1,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
                         {
                             "key": "field_6986f04bd2400",
                             "label": "Sub title",
@@ -1292,6 +1372,26 @@
                     "label": "Tables\/Bell Times",
                     "display": "block",
                     "sub_fields": [
+                        {
+                            "key": "field_6823e480a0005",
+                            "label": "Show as sub item in navigation",
+                            "name": "nav_sub_item",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": false,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": 0,
+                            "message": "",
+                            "ui": 1,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
                         {
                             "key": "field_699d7edb8d7e9",
                             "label": "Sub title",
